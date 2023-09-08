@@ -21,6 +21,18 @@ void increment_failed_count(TestState *t);
         increment_failed_count(testState); \
     }
 
+#define cexpect_size_t(actual, expect, testState) \
+    if (!((actual) == (expect))) { \
+        fprintf(stderr, "Assertion failed: expected %zu, but %zu | %s:%d\n", (expect), (actual), __FILE__, __LINE__); \
+        increment_failed_count(testState); \
+    }
+
+#define cexpect_char(actual, expect, testState) \
+    if (!((actual) == (expect))) { \
+        fprintf(stderr, "Assertion failed: expected %c, but %c | %s:%d\n", (expect), (actual), __FILE__, __LINE__); \
+        increment_failed_count(testState); \
+    }
+
 #define cexpect_str(actual, expect, testState) \
     if (!((actual) == (expect))) { \
         fprintf(stderr, "Assertion failed: expected %s, but %s | %s:%d\n", (expect), (actual), __FILE__, __LINE__); \
