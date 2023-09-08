@@ -1,6 +1,7 @@
 #ifndef SENTINEL_SEARCH
 #define SENTINEL_SEARCH
 
+
 // golangのエラー風味にしたい
 typedef enum {
     SentinelSearchResultFound,

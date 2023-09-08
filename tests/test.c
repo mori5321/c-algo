@@ -1,15 +1,21 @@
+#include <stdio.h>
+
 #include "./linear_search_test.h"
 #include "./sentinel_search_test.h"
-#include "./test_util.c"
+#include "./test_util.h"
 
-int failed_tests = 0;
 
 int main(void) {
-    linear_search_tests();
-    sentinel_search_tests();
+
+    TestState t = {
+        .failed = 0,
+    };
+
+    linear_search_tests(&t);
+    sentinel_search_tests(&t);
         
-    if (failed_tests > 0) {
-        fprintf(stderr, "%d tests failed\n", failed_tests);
+    if (t.failed > 0) {
+        fprintf(stderr, "%d tests failed\n", t.failed);
         return 1;
     }
 
