@@ -26,6 +26,9 @@ test:
 	$(CC) $(CFLAGS) -o test.out ./tests/**/*.c ./**/*.o
 	./test.out; rm ./test.out
 	make clean
+	
+# これでもいい
+# $(CC) $(CFLAGS) -o test.out ./tests/**/*.c ./lib/**/*.c
 
 
 
