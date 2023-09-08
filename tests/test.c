@@ -13,6 +13,6 @@ int main(void) {
         return 1;
     }
 
-    fprintf(stderr, "All tests passed\n");
+    fprintf(stderr, "\033[92mAll tests passed\033[0m\n");
     return 0;
 }

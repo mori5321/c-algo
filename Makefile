@@ -21,8 +21,8 @@ build:
 clean:
 	rm ./**/*.o
 
-run.test:
-	make build &&
+test:
+	make build
 	$(CC) $(CFLAGS) -o test.out ./tests/**/*.c ./**/*.o
 	./test.out; rm ./test.out
 	make clean
