@@ -2,6 +2,7 @@
 #define TEST_UTIL_H
 
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct {
     int failed;
@@ -42,6 +43,12 @@ void increment_failed_count(TestState *t);
 #define cexpect_enum(actual, expect, testState) \
     if (!((actual) == (expect))) { \
         fprintf(stderr, "Assertion failed: expected %d, but %d | %s:%d\n", (expect), (actual), __FILE__, __LINE__); \
+        increment_failed_count(testState); \
+    }
+
+#define cexpect_bool(actual, expect, testState) \
+    if (!((actual) == (expect))) { \
+        fprintf(stderr, "Assertion failed: expected %s, but %s | %s:%d\n", (expect) ? "true" : "false", (actual) ? "true" : "false", __FILE__, __LINE__); \
         increment_failed_count(testState); \
     }
 
