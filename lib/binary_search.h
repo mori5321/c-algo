@@ -10,4 +10,7 @@ typedef struct {
 
 BinarySearchResponse binary_search(const int a[], int n, int key);
 
+BinarySearchResponse debug_binary_search(int a[], int n, int key);
+
+
 #endif
