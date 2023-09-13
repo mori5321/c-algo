@@ -18,6 +18,9 @@ LIB=$(shell find ./lib -name "*.c")
 build:
 	$(CC) $(CFLAGS) -c $(LIB)
 
+build.bin.chain:
+	$(CC) $(CFLAGS) -o ./ChainHashTest.o ./bin/ChainHashTest.c ./lib/**/*.c
+
 clean:
 	rm ./**/*.o
 
