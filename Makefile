@@ -19,7 +19,7 @@ build:
 	$(CC) $(CFLAGS) -c $(LIB)
 
 build.bin.chain:
-	$(CC) $(CFLAGS) -o ./ChainHashTest.o ./bin/ChainHashTest.c ./lib/**/*.c
+	$(CC) $(CFLAGS) -o ./out/ChainHashTest.o ./bin/ChainHashTest.c ./lib/**/*.c
 
 clean:
 	rm ./**/*.o
