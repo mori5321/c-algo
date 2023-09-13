@@ -6,6 +6,7 @@
 #include "./linear_search_test.h"
 #include "./sentinel_search_test.h"
 #include "./binary_search_test.h"
+#include "./kuku_test.h"
 
 
 int main(void) {
@@ -19,6 +20,7 @@ int main(void) {
     linear_search_tests(&t);
     sentinel_search_tests(&t);
     binary_search_tests(&t);
+    kuku_tests(&t);
         
     if (t.failed > 0) {
         fprintf(stderr, "%d tests failed\n", t.failed);
