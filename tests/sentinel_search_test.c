@@ -1,4 +1,4 @@
-#include "../lib/sentinel_search.h"
+#include "../lib/search/sentinel_search.h"
 #include "./test_util.h"
 
 static void test_found_case(TestState *t) {

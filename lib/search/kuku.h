@@ -1,7 +1,7 @@
 #ifndef KUKU_H
 #define KUKU_H
 
-#include "./utils/string.h"
+#include "../utils/string.h"
 
 int (*kuku(int (*calc)(int, int)))[9];
 

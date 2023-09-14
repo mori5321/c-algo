@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "../lib/Member.h"
-#include "../lib/ChainHash.h"
+#include "../lib/search/Member.h"
+#include "../lib/search/ChainHash.h"
 
 typedef enum {
     TERMINATE, ADD, DELETE, SEARCH, CLEAR, DUMP

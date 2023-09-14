@@ -1,4 +1,4 @@
-#include "../lib/linear_search.h"
+#include "../lib/search/linear_search.h"
 #include "./test_util.h"
 
 static void test_found_case(TestState *t) {

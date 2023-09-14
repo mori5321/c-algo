@@ -1,5 +1,5 @@
 #include "./binary_search.h"
-#include "utils/string.h"
+#include "../utils/string.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

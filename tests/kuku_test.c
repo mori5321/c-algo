@@ -1,4 +1,4 @@
-#include "../lib/kuku.h"
+#include "../lib/search/kuku.h"
 #include "./kuku_test.h"
 #include "./test_util.h"
 
