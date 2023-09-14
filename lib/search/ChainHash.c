@@ -12,7 +12,7 @@ static void SetNode(Node *n, const Member *x, Node *next) {
     n->next = next;
 };
 
-int Initialize(ChainHash *h, int size) {
+int ChainHash_Initialize(ChainHash *h, int size) {
     if ((h->table = calloc(size, sizeof(Node *))) == NULL) {
         h->size = 0;
         return 0;
@@ -26,7 +26,7 @@ int Initialize(ChainHash *h, int size) {
     return 1;
 }
 
-Node *Search(const ChainHash *h, const Member *x) {
+Node *ChainHash_Search(const ChainHash *h, const Member *x) {
     int key = hash(x->no, h->size);
     Node *p = h->table[key];
 
@@ -40,7 +40,7 @@ Node *Search(const ChainHash *h, const Member *x) {
     return NULL;
 }
 
-int Add(ChainHash *h, const Member *x) {
+int ChainHash_Add(ChainHash *h, const Member *x) {
     int key = hash(x->no, h->size);
 
     const Node *p = h->table[key];
@@ -61,7 +61,7 @@ int Add(ChainHash *h, const Member *x) {
     return 0;
 }
 
-int Remove(ChainHash *h, const Member *x) {
+int ChainHash_Remove(ChainHash *h, const Member *x) {
     int key = hash(x->no, h->size);
     Node *p = h->table[key];
     Node **pp = &h->table[key];
@@ -82,7 +82,7 @@ int Remove(ChainHash *h, const Member *x) {
     return 1;
 };
 
-void Dump(const ChainHash *h) {
+void ChainHash_Dump(const ChainHash *h) {
     for (int i = 0; i < h->size; i++) {
         Node *p = h->table[i];
         printf("%02d ", i);
@@ -94,7 +94,7 @@ void Dump(const ChainHash *h) {
     }
 }
 
-void Clear(ChainHash *h) {
+void ChainHash_Clear(ChainHash *h) {
     for (int i = 0; i < h->size; i++) {
         Node *p = h->table[i]; // 着目Node
         while (p != NULL) {
@@ -106,8 +106,8 @@ void Clear(ChainHash *h) {
     }
 }
 
-void Terminate(ChainHash *h) {
-    Clear(h);
+void ChainHash_Terminate(ChainHash *h) {
+    ChainHash_Clear(h);
     free(h->table);
     h->size = 0;
 }

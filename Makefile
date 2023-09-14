@@ -21,6 +21,9 @@ build:
 build.bin.chain:
 	$(CC) $(CFLAGS) -o ./out/ChainHashTest.o ./bin/ChainHashTest.c ./lib/**/*.c
 
+build.bin.openhash:
+	$(CC) $(CFLAGS) -o ./out/ClosedHashTest.o ./bin/ClosedHashTest.c ./lib/**/*.c
+
 clean:
 	rm ./**/*.o
 
