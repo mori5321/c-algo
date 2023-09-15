@@ -1,0 +1,59 @@
+name: Bump version
+
+on:
+  workflow_dispatch:
+    inputs:
+      semver:
+        description: 'Which SemVer'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+  workflow_call:
+    inputs:
+      semver:
+        description: The image_name to build for.
+        required: true
+        type: string
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          token: ${{ secrets.MACHINE_USER_PAT_FOR_READ_REPO }}
+
+      - name: debug github ref
+        run: |
+          echo "${{ github.ref_name }}"
+          echo "${{ github.ref }}"
+          echo $GITHUB_REF
+          echo $BRANCH_NAME
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          base: ${{ github.ref_name }}
+          branch: ${{ github.ref_name }}-${{ steps.get_version.outputs.NEW_VERSION }}
+          add-paths: |
+            docs/CHANGELOG.md
+            apps/backend/package.json
+            apps/pipeline/package.json
+            docs/CHANGELOG.md
+            packages/openapi/package.json
+            packages/protobuf/package.json
+            scripts/package.json
+          commit-message: 'bump: v${{ steps.get_version.outputs.NEW_VERSION }}'
+          token: ${{ secrets.MACHINE_USER_PAT_FOR_READ_REPO }}
+          body: ${{ steps.get_release_note.outputs.result  }}
+          title: 'chore: bump v${{ steps.get_version.outputs.NEW_VERSION }}'
+          labels: |
+            Type: Documentation
+          draft: true
+          assignees: caddi-machine-user
+          milestone: 'v${{ steps.get_version.outputs.NEW_VERSION }}'
+
