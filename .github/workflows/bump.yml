@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        ref: ${{ github.ref }}
 
       - name: bump version
         run: jq '.version |= (. | split(".") | .[2] |= (tonumber + 1 | tostring) | join("."))' version.json > tmp.json && mv tmp.json version.json
@@ -45,7 +46,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5.0.2
         with:
           base: main
-          branch: ${{ github.ref_name }}-${{ steps.get_version.outputs.NEW_VERSION }}
+          branch: bump/${{ github.ref_name }}->${{ steps.get_version.outputs.NEW_VERSION }}
           add-paths: |
             version.json
           commit-message: 'bump: v${{ steps.get_version.outputs.NEW_VERSION }}'
