@@ -47,13 +47,7 @@ jobs:
           base: ${{ github.ref_name }}
           branch: ${{ github.ref_name }}-${{ steps.get_version.outputs.NEW_VERSION }}
           add-paths: |
-            docs/CHANGELOG.md
-            apps/backend/package.json
-            apps/pipeline/package.json
-            docs/CHANGELOG.md
-            packages/openapi/package.json
-            packages/protobuf/package.json
-            scripts/package.json
+            version.json
           commit-message: 'bump: v${{ steps.get_version.outputs.NEW_VERSION }}'
           token: ${{ secrets.MACHINE_USER_PAT_FOR_READ_REPO }}
           body: ${{ steps.get_release_note.outputs.result  }}
