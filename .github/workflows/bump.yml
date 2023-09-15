@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: bump version
+        run: jq '.version |= (. | split(".") | .[2] |= (tonumber + 1 | tostring) | join("."))' version.json > tmp.json && mv tmp.json version.json
+
       
       - name: generate new version and save to env variable
         id: get_version
