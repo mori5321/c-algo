@@ -23,7 +23,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        token: ${{ secrets.MACHINE_USER_PAT_FOR_READ_REPO }}
+
+      - name: bump version
+        run: jq '.version |= (. | split(".") | .[2] |= (tonumber + 1 | tostring) | join("."))' version.json > tmp.json && mv tmp.json version.json
+
+      
+      - name: generate new version and save to env variable
+        id: get_version
+        run: |
+          echo "NEW_VERSION=$(cat ./version.json | jq -r .version)" >> $GITHUB_OUTPUT
 
 
       - name: debug github ref
@@ -39,13 +47,7 @@ jobs:
           base: ${{ github.ref_name }}
           branch: ${{ github.ref_name }}-${{ steps.get_version.outputs.NEW_VERSION }}
           add-paths: |
-            docs/CHANGELOG.md
-            apps/backend/package.json
-            apps/pipeline/package.json
-            docs/CHANGELOG.md
-            packages/openapi/package.json
-            packages/protobuf/package.json
-            scripts/package.json
+            version.json
           commit-message: 'bump: v${{ steps.get_version.outputs.NEW_VERSION }}'
           token: ${{ secrets.MACHINE_USER_PAT_FOR_READ_REPO }}
           body: ${{ steps.get_release_note.outputs.result  }}
