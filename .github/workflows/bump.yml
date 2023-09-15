@@ -23,7 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        ref: ${{ github.ref }}
+        with: 
+          ref: ${{ github.ref }}
 
       - name: bump version
         run: jq '.version |= (. | split(".") | .[0] |= (tonumber + 1 | tostring) | join("."))' version.json > tmp.json && mv tmp.json version.json
